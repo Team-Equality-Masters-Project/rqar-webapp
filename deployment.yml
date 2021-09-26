@@ -17,7 +17,6 @@ kind: Deployment
 metadata:
   name: gke-test
 spec:
-  progressDeadlineSeconds: 3600
   replicas: 1
   selector:
     matchLabels:
