@@ -9,3 +9,7 @@
 
 3. Open browser and navigate to page: 
 ```http://localhost:8501/```
+
+
+## Github CI/CD
+Reference: https://docs.github.com/en/actions/deployment/deploying-to-google-kubernetes-engine
