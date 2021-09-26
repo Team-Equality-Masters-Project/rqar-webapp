@@ -35,7 +35,7 @@ spec:
       - name: gke-test
         image: gcr.io/PROJECT_ID/IMAGE:TAG
         ports:
-        - containerPort: 5000
+        - containerPort: 8501
         resources:
           requests:
             cpu: 100m
