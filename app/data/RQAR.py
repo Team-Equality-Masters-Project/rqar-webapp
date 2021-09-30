@@ -58,5 +58,3 @@ def RQAR(new_question, num_rec=15):
   RQAR_dict = dict(zip(relevant_subreddit.suggested_subreddits, relevant_subreddit.total_weight))
   RQAR_dict = sorted(RQAR_dict.items(), key=lambda x: (x[1],x[0]), reverse=True)
   return RQAR_dict
-
-print(RQAR('sub to look for plant care'))

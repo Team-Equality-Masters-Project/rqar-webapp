@@ -12,4 +12,4 @@ def find_subreddits(question):
     elif 'coding' in question:
         return coding_subreddits 
     else:
-        return gardening_subredditsna
+        return gardening_subreddits
