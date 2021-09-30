@@ -21,7 +21,7 @@ def get_details(sub_name):
 
     #find_a_reddit = reddit.subreddit('FindAReddit')
 
-    url = 'https://www.reddit.com/r/{}/about.json'.format(sub_name)
+    url = 'https://www.reddit.com/{}/about.json'.format(sub_name)
     req = request.Request(url)
     req.add_header('User-Agent', 'red-bot')
     response = request.urlopen(req)
@@ -34,7 +34,7 @@ def get_details(sub_name):
     
     desc = data_json["data"]["public_description"]
 
-    sub_url = 'https://www.reddit.com/r/'+ sub_name
+    sub_url = 'https://www.reddit.com/'+ sub_name
 
     banner_img_url = data_json["data"]["banner_img"]
 
@@ -44,6 +44,6 @@ def get_details(sub_name):
 
     created_time = created_utc #utc_to_local(created_utc)
 
-    return img_url, 'r/'+sub_name, desc, sub_url, banner_img_url, subscriber_count, created_time
+    return img_url, sub_name, desc, sub_url, banner_img_url, subscriber_count, created_time
 
 

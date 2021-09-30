@@ -8,7 +8,8 @@ from pyvis.network import Network
 from IPython.core.display import display, HTML
 import streamlit.components.v1 as components
 import base64
-import data.model_api as model
+# import data.model_api as model
+import data.RQAR as model
 import data.reddit_api as reddit_api
 
 
@@ -57,7 +58,8 @@ def app():
             time.sleep(1)
         with st.spinner(":heavy_check_mark: Fetched subreddits!"):
             time.sleep(1)
-            suggestions = model.find_subreddits(question)
+            #suggestions = model.find_subreddits(question)
+            suggestions = model.RQAR(question)
 
         
         col1, col2, col3 = st.columns(3)
