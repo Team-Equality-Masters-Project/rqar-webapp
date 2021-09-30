@@ -1,35 +1,26 @@
-FROM ubuntu:20.04
+FROM python:3.8.2-slim-buster
 
-RUN apt-get update -y && \
-    apt-get install -y python3-pip python-dev vim curl
+# virtualenv
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip3 install --upgrade pip
-
-COPY ./app /app
-COPY requirements.txt /tmp/
+RUN pip install --upgrade pip
 
 WORKDIR /app
 
-RUN pip3 install -r /tmp/requirements.txt -t /app
-RUN pip3 install gevent -t /app --upgrade
+COPY ./app /app
 
-# Expose port 
-ENV PORT 8501
+COPY requirements.txt /tmp/
 
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install streamlit
+
+EXPOSE 8501
+ 
 # cmd to launch app when container is run
-CMD streamlit run app.py
+ENTRYPOINT ["streamlit", "run"]
 
-# streamlit-specific commands for config
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
-RUN mkdir -p /root/.streamlit
-RUN bash -c 'echo -e "\
-[general]\n\
-email = \"\"\n\
-" > /root/.streamlit/credentials.toml'
+CMD ["app.py"]
 
-RUN bash -c 'echo -e "\
-[server]\n\
-enableCORS = false\n\
-" > /root/.streamlit/config.toml'
 

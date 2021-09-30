@@ -6,7 +6,6 @@ requests==2.24.0
 praw==7.4.0
 numpy==1.19.5
 pyvis==0.1.9
-streamlit==0.88.0
 networkx==2.6.3
 pytz==2020.1
 ipython==7.28.0
