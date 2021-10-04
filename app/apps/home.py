@@ -63,15 +63,14 @@ def app():
 
         
         col1, col2, col3 = st.columns(3)
-        keys = list(suggestions.keys())
         
-        col1.markdown(make_sub_tile(keys[0], suggestions[keys[0]]), unsafe_allow_html=True)
-        col2.markdown(make_sub_tile(keys[1], suggestions[keys[1]]), unsafe_allow_html=True)
-        col3.markdown(make_sub_tile(keys[2], suggestions[keys[2]]), unsafe_allow_html=True)
-        col1.markdown(make_sub_tile(keys[3], suggestions[keys[3]]), unsafe_allow_html=True)
-        col2.markdown(make_sub_tile(keys[4], suggestions[keys[4]]), unsafe_allow_html=True)
-        col3.markdown(make_sub_tile(keys[5], suggestions[keys[5]]), unsafe_allow_html=True)
-
+        col1.markdown(make_sub_tile(suggestions[0][0], suggestions[0][1]), unsafe_allow_html=True)
+        col2.markdown(make_sub_tile(suggestions[1][0], suggestions[1][1]), unsafe_allow_html=True)
+        col3.markdown(make_sub_tile(suggestions[2][0], suggestions[2][1]), unsafe_allow_html=True)
+        col1.markdown(make_sub_tile(suggestions[3][0], suggestions[3][1]), unsafe_allow_html=True)
+        col2.markdown(make_sub_tile(suggestions[4][0], suggestions[4][1]), unsafe_allow_html=True)
+        col3.markdown(make_sub_tile(suggestions[5][0], suggestions[5][1]), unsafe_allow_html=True)
+        
         st.markdown("### Knowledge graph")  #(To change)
 
         G = nx.karate_club_graph()

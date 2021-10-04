@@ -46,4 +46,3 @@ def get_details(sub_name):
 
     return img_url, sub_name, desc, sub_url, banner_img_url, subscriber_count, created_time
 
-
