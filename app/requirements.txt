@@ -1,0 +1,16 @@
+pandas==1.1.5
+networkx==2.6.3
+requests==2.26.0
+sentence_transformers==2.0.0
+faiss_cpu==1.7.0
+pytz==2021.1
+nltk==3.2.5
+scipy==1.7.1
+numpy==1.19.5
+ipython==7.28.0
+matplotlib==3.4.3
+numerize==0.12
+praw==7.4.0
+pyvis==0.1.9
+streamlit==0.89.0
+wordcloud==1.8.1
