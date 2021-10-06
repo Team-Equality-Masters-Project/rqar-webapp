@@ -21,8 +21,8 @@ def app():
 
     #g4.show_buttons(filter_=['physics'])
 
-    g4.show('kg.html')
+    g4.show('resources/kg.html')
     
-    kg_html = open("kg.html", 'r', encoding='utf-8')
+    kg_html = open("resources/kg.html", 'r', encoding='utf-8')
     kg_html_code = kg_html.read() 
     components.html(kg_html_code, height=1200)
