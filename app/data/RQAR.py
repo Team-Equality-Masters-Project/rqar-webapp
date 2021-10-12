@@ -5,19 +5,34 @@ import pickle
 from data.preprocessing import normalize_text
 from sentence_transformers import SentenceTransformer
 import faiss
+import streamlit as st
 
 # Load final train dataset
-df_QA = pd.read_csv('data/dataset/main_data.csv')
-corpus = list(np.unique(df_QA['question_vocab'].tolist()))
+@st.cache
+def load_data(path='data/dataset/main_data.csv'):
+     df = pd.read_csv(path)
+     corpus = list(np.unique(df['question_vocab'].tolist()))
+     return df, corpus
+
 # Load Semantic Search Trained BERT
-embedder = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
+@st.cache(allow_output_mutation=True)
+def load_bert(model='multi-qa-MiniLM-L6-cos-v1'):
+     return SentenceTransformer(model)
+
 # Load Faiss
-with open('data/faiss_index.pickle', "rb") as h:
-     index = faiss.deserialize_index(pickle.load(h))
+@st.cache(allow_output_mutation=True)
+def load_faiss(path='data/faiss_index.pickle'):
+     with open(path, "rb") as h:
+          index = faiss.deserialize_index(pickle.load(h))
+     return index
 
 # Recommender System
 def RQAR(new_question):
 
+     # Init
+     df_QA, corpus = load_data()
+     embedder = load_bert()
+     index = load_faiss()
      num_rec = 10 # Number of related questions/neighbors to search for with Faiss
      question_type = 'question_vocab' # Using cleaned historical question
 
