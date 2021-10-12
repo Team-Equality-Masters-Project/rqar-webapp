@@ -6,6 +6,7 @@ from urllib.request import urlopen
 from datetime import datetime, timezone
 import pytz
 from numerize import numerize 
+import re
 
 
 def utc_to_local(utc_dt):
@@ -34,6 +35,8 @@ def get_details(sub_name):
     
     desc = data_json["data"]["public_description"]
 
+    desc = format_desc(desc)
+
     sub_url = 'https://www.reddit.com/'+ sub_name
 
     banner_img_url = data_json["data"]["banner_img"]
@@ -46,3 +49,8 @@ def get_details(sub_name):
 
     return img_url, sub_name, desc, sub_url, banner_img_url, subscriber_count, created_time
 
+def format_desc(desc):
+    clean = re.compile('<.*?>')
+    desc = re.sub(clean, '', desc)
+    desc = desc.replace('\n', '')
+    return desc[:100] + (desc[100:] and '...')

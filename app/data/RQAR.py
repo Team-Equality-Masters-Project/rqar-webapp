@@ -43,6 +43,7 @@ def RQAR(new_question):
      relevant_subreddit['total_weight'] = 0.75*(1 - relevant_subreddit['semantic_similarity']) + 0.10*relevant_subreddit['norm_upvotes'] + 0.15*(relevant_subreddit['occurrence']/num_rec)
 
      relevant_subreddit = relevant_subreddit[relevant_subreddit['total_weight'].notnull()]
+     relevant_subreddit.total_weight = round((relevant_subreddit.total_weight * 100))
      relevant_subreddit = relevant_subreddit.drop_duplicates(subset='suggested_subreddits').sort_values(by='total_weight', ascending=False).reset_index(drop=True)
 
      # Formating
