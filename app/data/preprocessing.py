@@ -5,7 +5,7 @@ from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
-nltk.data.path.append('/Users/haley/Documents/GitHub/rqar-webapp/app/data/nltk_data')
+nltk.data.path.append('data/nltk_data')
 
 def normalize_text(text):
     toko_tokenizer = ToktokTokenizer()
