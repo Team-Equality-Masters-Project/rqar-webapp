@@ -1,4 +1,5 @@
 FROM python:3.8.2-slim-buster
+RUN apt-get update && apt-get install -y git && apt-get -y install gcc
 
 # virtualenv
 ENV VIRTUAL_ENV=/opt/venv
