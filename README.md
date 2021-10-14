@@ -1,4 +1,4 @@
-# To setup and run webapp locally
+## To setup and run webapp locally
 
 0. Set up environment:
 ```python -m venv ~/.streamlit_ve```
@@ -17,7 +17,7 @@
 3. Open browser and navigate to page:
 ```http://localhost:8501/```
 
-# Build and Deploy to [Google Kubernetes Engine][gke] cluster
+## Build and Deploy to [Google Kubernetes Engine][gke] cluster
 
 - [Reference1](https://docs.github.com/en/actions/deployment/deploying-to-google-kubernetes-engine)
 - [Reference2](https://cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build)
