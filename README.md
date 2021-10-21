@@ -17,6 +17,9 @@
 3. Open browser and navigate to page:
 ```http://localhost:8501/```
 
+#### Docker build 
+From root folder: ```docker build --no-cache=true -t rqar_image .```
+
 ## Build and Deploy to [Google Kubernetes Engine][gke] cluster
 
 - [Reference1](https://docs.github.com/en/actions/deployment/deploying-to-google-kubernetes-engine)
