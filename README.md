@@ -1,3 +1,15 @@
+# A Reinforcement-based QA Recommender System for Responding to Community-based Suggestions using Enhanced Contextualization
+Team: Abhishek Bais, Haley Feng, Princy Joy, Shannon Phu
+
+December 2021
+
+# Architecture
+![](docs/images/architecture.png)
+
+# Web Application
+![](docs/images/webapp.png)
+
+# Deployment steps
 ## To setup and run webapp locally
 
 0. Set up environment:
