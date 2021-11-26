@@ -42,10 +42,4 @@ class QA_App:
             """ 
         )
 
-        st.sidebar.markdown(
-            f"""
-            [![Streamlit](https://flat.badgen.net/badge/streamlit/
-            {version('streamlit')}/grey?icon=pypi)]
-            (https://github.com/streamlit/streamlit)
-            """
-        )
+       

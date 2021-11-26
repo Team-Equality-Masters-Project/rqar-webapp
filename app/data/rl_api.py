@@ -3,6 +3,7 @@ import json
 import os
 import time
 import uuid
+import streamlit as st
 
 import torch
 from azure.cognitiveservices.personalizer import PersonalizerClient
@@ -18,18 +19,20 @@ def random_state(seed):
   if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
 
+@st.cache(allow_output_mutation=True)
+def load_parrot():
+    parrot = Parrot(model_tag="prithivida/parrot_paraphraser_on_T5")
+    return parrot
 
-key = "202fa2f3b54c43eda9aa6e0873f59c3b"
-endpoint = "https://personalizer-reddit.cognitiveservices.azure.com/"
-random_state(1234)
-
-# Create an instance of parror
-parrot = Parrot(model_tag="prithivida/parrot_paraphraser_on_T5")
-# Create a personalizer client
-client = PersonalizerClient(endpoint, CognitiveServicesCredentials(key))
+@st.cache(allow_output_mutation=True)
+def load_rl_client():
+    key = "202fa2f3b54c43eda9aa6e0873f59c3b"
+    endpoint = "https://personalizer-reddit.cognitiveservices.azure.com/"
+    client = PersonalizerClient(endpoint, CognitiveServicesCredentials(key))
+    return client
 
 
-def get_query_paraphrases_ranked_by_adequacy(query):
+def get_query_paraphrases_ranked_by_adequacy(parrot, query):
    return parrot.augment(input_phrase=query, 
                         diversity_ranker="levenshtein",
                         do_diverse=False, 
@@ -38,7 +41,7 @@ def get_query_paraphrases_ranked_by_adequacy(query):
                         adequacy_threshold = 0.90, 
                         fluency_threshold = 0.70)
 
-def get_query_paraphrases_ranked_by_fluency(query):
+def get_query_paraphrases_ranked_by_fluency(parrot, query):
   return parrot.augment(input_phrase=query, 
                         diversity_ranker="levenshtein",
                         do_diverse=False, 
@@ -47,7 +50,7 @@ def get_query_paraphrases_ranked_by_fluency(query):
                         adequacy_threshold = 0.70, 
                         fluency_threshold = 0.90)
 
-def get_query_paraphrases_ranked_by_diversity(query):
+def get_query_paraphrases_ranked_by_diversity(parrot, query):
   return parrot.augment(input_phrase=query, 
                         diversity_ranker="levenshtein",
                         do_diverse=True, 
@@ -57,13 +60,13 @@ def get_query_paraphrases_ranked_by_diversity(query):
                         fluency_threshold = 0.70)
 
 
-def get_query_paraphrases_ranked_by_type(query, rank_by_type):
+def get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type):
   if (rank_by_type == "Adequacy"):
-    return get_query_paraphrases_ranked_by_adequacy(query)
+    return get_query_paraphrases_ranked_by_adequacy(parrot, query)
   elif (rank_by_type == "Fluency"):
-    return get_query_paraphrases_ranked_by_fluency(query)
+    return get_query_paraphrases_ranked_by_fluency(parrot, query)
   else:
-    return get_query_paraphrases_ranked_by_diversity(query)
+    return get_query_paraphrases_ranked_by_diversity(parrot, query)
 
 
 def get_agent_reward(client, query_paraphrases, context, agent_actions):
@@ -107,7 +110,7 @@ def get_max_reward(reward_a, reward_b, reward_c):
     return max(list)
 
 
-def get_rl_text_impl(query, rl_option):
+def get_rl_text_impl(parrot, client, query, rl_option):
     improved_query_event_id = 0
     improved_query_reward = 0
     agent_actions = ""
@@ -118,7 +121,7 @@ def get_rl_text_impl(query, rl_option):
     
     if (rl_option == "Adequacy"):
         rank_by_type = "Adequacy"
-        query_paraphrases_ranked_by_adequacy = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_adequacy = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
 
         # Get agent actions, reward for Adequacy
         agent_actions = get_agent_actions(query_paraphrases_ranked_by_adequacy)
@@ -126,7 +129,7 @@ def get_rl_text_impl(query, rl_option):
     elif (rl_option == "Fluency"):
         # Get ranked paraphrased queries by type Fluency
         rank_by_type = "Fluency"
-        query_paraphrases_ranked_by_fluency = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_fluency = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
         
         # Get agent actions, reward for Fluency
         agent_actions = get_agent_actions(query_paraphrases_ranked_by_fluency)
@@ -134,7 +137,7 @@ def get_rl_text_impl(query, rl_option):
     elif (rl_option == "Diversity"):
         # Get ranked paraphrased queries by type Diversity
         rank_by_type = "Diversity"
-        query_paraphrases_ranked_by_diversity = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_diversity = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
         
         # Get agent actions, reward for Diversity
         agent_actions = get_agent_actions(query_paraphrases_ranked_by_diversity)
@@ -142,13 +145,13 @@ def get_rl_text_impl(query, rl_option):
     else:
         # Get ranked paraphrased queries by type Diversity
         rank_by_type = "Adequacy"
-        query_paraphrases_ranked_by_adequacy = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_adequacy = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
 
         rank_by_type = "Fluency"
-        query_paraphrases_ranked_by_fluency = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_fluency = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
 
         rank_by_type = "Diversity"
-        query_paraphrases_ranked_by_diversity = get_query_paraphrases_ranked_by_type(query, rank_by_type)
+        query_paraphrases_ranked_by_diversity = get_query_paraphrases_ranked_by_type(parrot, query, rank_by_type)
 
         # Get agent actions, reward for Adequacy, Fluency, and Diversity
         agent_actions_adequacy  = get_agent_actions(query_paraphrases_ranked_by_adequacy)
@@ -177,10 +180,12 @@ def get_rl_text_impl(query, rl_option):
 
 
 def get_rl_text(query, rl_option):
+    parrot = load_parrot()
+    client = load_rl_client()
     user_preference = get_user_preference(rl_option)
     context =[user_preference]
     
-    query_paraphrases_ranked = get_query_paraphrases_ranked_by_type(query, rl_option)
+    query_paraphrases_ranked = get_query_paraphrases_ranked_by_type(parrot, query, rl_option)
 
     agent_actions = get_agent_actions(query_paraphrases_ranked)
 
@@ -190,6 +195,7 @@ def get_rl_text(query, rl_option):
     return response.reward_action_id, event_id
 
 def update_model(yes, no, event_id):
+    client = load_rl_client()
     reward_val = "0.0"
     if(yes == True):
         reward_val = "1.0"
