@@ -3,6 +3,13 @@ Team: Abhishek Bais, Haley Feng, Princy Joy, Shannon Phu
 
 December 2021
 
+**Main Artifacts**
+- [Project report](https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/DocuSigned_295B_Final_Report.docx.pdf)
+- [Poster board](https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/Poster%20Board.pdf)
+- [Presentation slides](https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/CMPE%20295%20Expo%20Presentation.pdf)
+- [Demo video](https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/videos/Master%20Project%20Video.mp4)
+- [Other artifacts](https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/Artifacts.txt)
+
 # Project Summary
 In recent years, several Community-based Question Answering (CBQA) platforms spanning multiple verticals such as social news aggregation, business communication, retail, platforms for enthusiast programmers, and social media platforms for interactions and inquiry have gained traction. These platforms provide registered users access to a huge knowledge database of questions and answers accumulated over time. Users can post questions, seek crowdsourced answers, find shared interest groups, and learn from each other.
 
