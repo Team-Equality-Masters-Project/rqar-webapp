@@ -22,6 +22,7 @@ https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/videos/Pr
 https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/CMPE%20295%20Expo%20Presentation.pdf
 
 8. Project 5 min Video
+   https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/videos/Master%20Project%20Video.mp4
     
 9. Project Source Code
 9.1 Notebooks
