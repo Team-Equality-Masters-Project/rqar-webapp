@@ -1,0 +1,54 @@
+The project artifacts are listed underneath
+
+1. Project Repository
+https://github.com/Team-Equality-Masters-Project/rqar-webapp
+
+2. Project Abstract
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/FinalProjectAbstract.pdf
+
+3. Project Poster Board
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/Poster%20Board.pdf
+
+4. Project Report
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/DocuSigned_295B_Final_Report.docx.pdf
+
+5. Project Elevator Pitch Slide deck
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/ProjectElevatorPitch.pdf
+
+6. Project Elevator Pitch Video
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/videos/ProjectElevatorPitch.mp4
+
+7. Project Expo Slide Deck
+https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/docs/CMPE%20295%20Expo%20Presentation.pdf
+
+8. Project 5 min Video
+    
+9. Project Source Code
+9.1 Notebooks
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/tree/main/notebooks 
+
+9.2 Web Application
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/tree/main/app
+
+9.3 Data Scraping
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/tree/main/scraper
+
+9.4 Docker File
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/Dockerfile
+
+9.5 Deployment File
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/deployment.yml
+
+9.6 Kustomization Yaml file
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/kustomization.yml
+
+9.7 Software requirements.txt file
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/requirements.txt
+
+9.8 Service Yaml file
+    https://github.com/Team-Equality-Masters-Project/rqar-webapp/blob/main/service.yml
+
+9.9 Datasets Used
+    
+
+
