@@ -113,7 +113,6 @@ def app():
                     st.markdown("### Knowledge graph")  
 
                     G = nx.read_gpickle("data/kg-large.gpickle")
-                    for sug in suggestions: print(sug[0])
                     g = G.subgraph([ sug[0] for sug in suggestions])
                     sub_graph = Network(width='100%')
                     sub_graph.from_nx(g)
